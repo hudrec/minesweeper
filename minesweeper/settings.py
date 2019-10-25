@@ -25,7 +25,7 @@ SECRET_KEY = 'txj_74us@&(mx5g8t3-#@e4s+_xhah3)^ipsrqe(*@kl#ua@tt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['minesweepergame.herokuapp.com']
+ALLOWED_HOSTS = ['minesweepergame.herokuapp.com', 'localhost']
 
 
 # Application definition

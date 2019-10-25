@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from core import views
 
 urlpatterns = [
+    path('mines/revealed/(?P<position_x>[0-9]+)/(?P<position_y>[0-9]+)/', views.revealed),
     path('admin/', admin.site.urls),
 ]
