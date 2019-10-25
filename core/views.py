@@ -3,12 +3,20 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 # Create your views here.
 table = [
-            ['F','F','F','F','F','F',],
-            ['F','F','F','F','F','F',],
-            ['F','F','F','F','F','F',],
-            ['F','F','F','F','F','F',],
-            ['F','F','F','F','F','F',],
-            ['F','F','F','F','F','F',],
+            ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'B', 'F', 'F', ],
+            ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', ],
+            ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', ],
+            ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', ],
+            ['F', 'F', 'F', 'F', 'B', 'F', 'F', 'F', 'F', 'F', 'B', 'F', 'F', 'F', ],
+            ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', ],
+            ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', ],
+            ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', ],
+            ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', ],
+            ['F', 'F', 'B', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', ],
+            ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', ],
+            ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'B', 'F', 'F', 'F', ],
+            ['F', 'F', 'F', 'F', 'F', 'F', 'F', 'B', 'F', 'F', 'F', 'F', 'F', 'F', ],
+
         ]
 
 
@@ -19,10 +27,11 @@ def revealed_cell(r_x, r_y):
 
 @api_view(['POST'])
 def revealed(request, position_x, position_y):
+    print(table)
     position_x = int(position_x)
     position_y = int(position_y)
     if table[position_x][position_y] == 'B':
-        return Response({'status': 'GAME OVER'})
+        return Response({'status': 'BOMB'})
     else:
         revealed_cell(position_x + 1, position_y + 1)
         revealed_cell(position_x - 1, position_y - 1)
@@ -34,4 +43,12 @@ def revealed(request, position_x, position_y):
         revealed_cell(position_x, position_y - 1)
         revealed_cell(position_x, position_y)
 
-        return Response({'table': table})
+        return Response({'table': table, 'status': 'NEXT'})
+
+
+@api_view(['POST'])
+def flag(request, position_x, position_y):
+    position_x = int(position_x)
+    position_y = int(position_y)
+    table[position_x][position_y] = 'L'
+    return Response({'table': table, 'status': 'NEXT'})

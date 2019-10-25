@@ -20,5 +20,6 @@ from django.conf.urls import url, include
 
 urlpatterns = [
     url(r'^mines/revealed/(?P<position_x>[0-9]+)/(?P<position_y>[0-9]+)/', views.revealed),
+    url(r'^mines/flag/(?P<position_x>[0-9]+)/(?P<position_y>[0-9]+)/', views.flag),
     url(r'^admin/', admin.site.urls),
 ]
